@@ -1,8 +1,10 @@
-FROM openjdk:8-jdk-alpine
+FROM eclipse-temurin:21-jre-alpine
 
-ADD /mnt/c/programming/microservicios/workspace/microservicios-eureka/target/microservicios-eureka-0.0.1-SNAPSHOT.jar microservicios-eureka.jar
+WORKDIR /app
 
-ENTRYPOINT [ "java","-jar","/microservicios-eureka.jar" ]
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 
-EXPOSE 8762
+EXPOSE 8761
 
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
